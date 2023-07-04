@@ -6,7 +6,7 @@ const cors = require('cors')
 const basicAuth = require('express-basic-auth')
 
 const app = express()
-const port = 3000
+const port = 3003
 app.use(express.json());
 app.use(cors())
 // app.use(basicAuth({
