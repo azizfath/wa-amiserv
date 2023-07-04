@@ -41,14 +41,18 @@ app.post('/send',
         const result = validationResult(req);
         if (result.isEmpty()) {
             try{
-                const number = req.body.phone_number;
+                let number = req.body.number;
                 const text = req.body.message;
+                if (number.substring(0,2)=="08"||number.substring(0,2)!="62"){
+                    number = "62"+number.substring(1)
+                }
+                // console.log(number);
                 const chatId = number.substring(0) + "@c.us";
                 
                 client.sendMessage(chatId, text);
                 return res.status(200).json({
                     status: "ok",
-                    detail : req.body
+                    detail : {number,chatId,text}
                 });
             }catch(err) {
                 console.log(err)
